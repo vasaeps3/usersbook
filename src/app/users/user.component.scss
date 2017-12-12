@@ -1,0 +1,21 @@
+.table {
+    tr {
+        &:first-child {
+            td {
+                border-top: none;
+            }
+        }
+        td {
+            &:first-child {
+                text-align: right;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .card-block {
+        padding: 0;
+    }
+}

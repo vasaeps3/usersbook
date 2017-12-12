@@ -1,0 +1,21 @@
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
+
+import { User } from "../models/user.model";
+
+
+@Injectable()
+export class UserService {
+    constructor(
+        private _httpClient: HttpClient
+    ) { }
+
+    public getAllUsers(): Observable<User[]> {
+        return <Observable<User[]>>this._httpClient.get("http://jsonplaceholder.typicode.com/users");
+    }
+
+    public getUserById(id: number): Observable<User> {
+        return <Observable<User>>this._httpClient.get("http://jsonplaceholder.typicode.com/users/" + id);
+    }
+}
