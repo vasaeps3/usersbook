@@ -1,4 +1,4 @@
-import { Subject } from "rxjs/Subject";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit, Input, Renderer2 } from "@angular/core";
 
@@ -11,7 +11,7 @@ import { User } from "../../models/user.model";
     styleUrls: ["./user-detail-modal.component.scss"]
 })
 export class UserDetailModalComponent implements OnInit {
-    @Input() user$: Subject<User>;
+    @Input() user$: BehaviorSubject<User>;
 
     public user: User;
 
@@ -21,7 +21,9 @@ export class UserDetailModalComponent implements OnInit {
 
     public ngOnInit(): void {
         this.user$.subscribe((user: User) => {
-            this.renderer.addClass(document.body, "modal-open");
+            if (user) {
+                this.renderer.addClass(document.body, "modal-open");
+            }
             this.user = user;
         });
     }

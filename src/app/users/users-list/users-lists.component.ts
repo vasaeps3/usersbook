@@ -1,11 +1,11 @@
-import { Subject } from "rxjs/Subject";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import _ from "lodash";
+import { Observable } from "rxjs/Observable";
 import { Component, OnInit } from "@angular/core";
-import { NgForm } from "@angular/forms";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
 
 import { User } from "../../models/user.model";
 import { UsersService } from "../users.service";
-import { Observable } from "rxjs/Observable";
 
 
 @Component({
@@ -16,9 +16,9 @@ import { Observable } from "rxjs/Observable";
 export class UsersListComponent implements OnInit {
 
     public users: User[];
-    public user$: Subject<User> = new Subject();
+    public user$: BehaviorSubject<User> = new BehaviorSubject(null);
 
-    public query$: Subject<string> = new Subject<string>();
+    public userDetailId: number;
 
     constructor(
         private router: Router,
@@ -32,10 +32,33 @@ export class UsersListComponent implements OnInit {
                 this.users = data["users"];
             }
         );
+
+        this.activatedRouter.queryParams.subscribe(
+            queryParams => {
+                this.userDetailId = +queryParams["userDetailId"] || null;
+                if (this.userDetailId) {
+                    const userDetail = _.find(this.users, u => u.id === this.userDetailId) || null;
+                    if (userDetail) {
+                        this.user$.next(userDetail);
+                    }
+                }
+            }
+        );
+
+        this.user$.subscribe((user: User) => {
+            if (!user) {
+                this.showModal(null);
+            }
+        });
+
     }
 
     public showModal(user: User) {
-        this.user$.next(user);
+        const extras: NavigationExtras = { relativeTo: this.activatedRouter };
+        if (user) {
+            extras.queryParams = { userDetailId: user.id };
+        }
+        this.router.navigate(["./"], extras);
     }
 
 }

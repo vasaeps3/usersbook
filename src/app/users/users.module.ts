@@ -1,5 +1,4 @@
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 
 import { UsersService } from "./users.service";
@@ -13,8 +12,7 @@ import { UsersListResolverService } from "./users-list/users-list-resolver.servi
 @NgModule({
     imports: [
         CommonModule,
-        UsersRoutingModule,
-        FormsModule
+        UsersRoutingModule
     ],
     declarations: [
         UserComponent,
