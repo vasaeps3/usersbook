@@ -1,0 +1,29 @@
+.modal{
+    display: block;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-body{
+    padding: 0 15px;
+}
+
+.table {
+    tr {
+        &:first-child {
+            td {
+                border-top: none;
+            }
+        }
+        td {
+            &:first-child {
+                text-align: right;
+                font-weight: bold;
+            }
+            padding: 0.5rem;
+        }
+    }
+}
+
+p{
+    margin-bottom: 0;
+}

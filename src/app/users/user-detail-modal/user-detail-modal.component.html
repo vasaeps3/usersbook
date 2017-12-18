@@ -1,0 +1,61 @@
+<div *ngIf="user" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{user.name}}</h5>
+                <button type="button" class="close" (click)="close()">
+                    <span>×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td>Username:</td>
+                            <td>{{user.username}}</td>
+                        </tr>
+                        <tr>
+                            <td>E-mail:</td>
+                            <td>
+                                <a href="mailto:{{user.email}}" title="{{user.email}}">{{user.email}}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>
+                                <a href="tel:{{user.phone}}" title="{{user.phone}}">{{user.phone}}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Address:</td>
+                            <td>
+                                <span *ngIf="user.address.zipcode">{{user.address.zipcode}}, </span>
+                                <span *ngIf="user.address.city">{{user.address.city}} </span>
+                                <span *ngIf="user.address.street">{{user.address.street}} </span>
+                                <span *ngIf="user.address.suite">{{user.address.suite}} </span>
+                                <span *ngIf="user.address.geo.lat&&user.address.geo.lng">({{user.address.geo.lat}},{{user.address.geo.lng}})</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Company:</td>
+                            <td>
+                                <p *ngIf="user.company.name">{{user.company.name}}</p>
+                                <p *ngIf="user.company.catchPhrase">"{{user.company.catchPhrase}}"</p>
+                                <p *ngIf="user.company.bs">{{user.company.bs}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Website:</td>
+                            <td>
+                                <span *ngIf="user.website">{{user.website}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" (click)="close()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

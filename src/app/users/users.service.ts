@@ -6,16 +6,15 @@ import { User } from "../models/user.model";
 
 
 @Injectable()
-export class UserService {
+export class UsersService {
+    private static readonly BASE_URL = "http://jsonplaceholder.typicode.com";
+
     constructor(
         private _httpClient: HttpClient
     ) { }
 
     public getAllUsers(): Observable<User[]> {
-        return <Observable<User[]>>this._httpClient.get("http://jsonplaceholder.typicode.com/users");
+        return <Observable<User[]>>this._httpClient.get(`${UsersService.BASE_URL}/users`);
     }
 
-    public getUserById(id: number): Observable<User> {
-        return <Observable<User>>this._httpClient.get("http://jsonplaceholder.typicode.com/users/" + id);
-    }
 }
