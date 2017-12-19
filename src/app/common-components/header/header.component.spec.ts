@@ -32,7 +32,7 @@ describe("HeaderComponent (inline template)", () => {
         expect(el.textContent).toContain(comp.textLogo);
     });
 
-    it("should display a different test title", () => {
+    it("should display a different text logo", () => {
         comp.textLogo = "Test text logo";
         fixture.detectChanges();
         expect(el.textContent).toContain("Test text logo");
