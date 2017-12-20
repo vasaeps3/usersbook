@@ -24,6 +24,7 @@ export class UserDetailModalComponent implements OnInit {
             if (user) {
                 this.renderer.addClass(document.body, "modal-open");
             }
+
             this.user = user;
         });
     }
