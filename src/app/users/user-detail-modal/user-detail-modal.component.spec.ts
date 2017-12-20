@@ -3,6 +3,7 @@ import { DebugElement } from "@angular/core";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { async, TestBed, ComponentFixture } from "@angular/core/testing";
 
+import * as fixtures from "../../testing/fixture";
 import { User } from "../../models/user.model";
 import { UserDetailModalComponent } from "./user-detail-modal.component";
 
@@ -12,13 +13,6 @@ describe("UserDetailModalComponent", () => {
     let component: UserDetailModalComponent;
     let fixture: ComponentFixture<UserDetailModalComponent>;
 
-    const expectedUser: User = {
-        id: 1,
-        name: "expectedUser",
-        username: "Expected User",
-        email: "expectedUser@google.com",
-        phone: "+123(32)111-23-21"
-    };
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -43,13 +37,13 @@ describe("UserDetailModalComponent", () => {
 
     it("should change user when I emit user", () => {
         component.user = null;
-        component.user$.next(expectedUser);
+        component.user$.next(fixtures.user);
 
-        expect(component.user).toBe(expectedUser);
+        expect(component.user).toBe(fixtures.user);
     });
 
     it("should modal window be shown if the user is not null", () => {
-        component.user$.next(expectedUser);
+        component.user$.next(fixtures.user);
         fixture.detectChanges();
         const modalElement: DebugElement = fixture.debugElement.query(By.css(".modal"));
 
@@ -57,7 +51,7 @@ describe("UserDetailModalComponent", () => {
     });
 
     it("should display button 'Close' if modal is shown", () => {
-        component.user$.next(expectedUser);
+        component.user$.next(fixtures.user);
         fixture.detectChanges();
         const buttonClose: DebugElement = fixture.debugElement.query(By.css(".modal-footer button"));
 
@@ -65,7 +59,7 @@ describe("UserDetailModalComponent", () => {
     });
 
     it("should make user null when I click close", () => {
-        component.user$.next(expectedUser);
+        component.user$.next(fixtures.user);
         fixture.detectChanges();
         const buttonClose = fixture.debugElement.query(By.css(".modal-footer button"));
         buttonClose.triggerEventHandler("click", null);
