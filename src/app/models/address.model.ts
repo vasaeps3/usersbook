@@ -1,9 +1,9 @@
 export class Address {
-    street?: string;
-    suite?: string;
-    city?: string;
-    zipcode?: string;
-    geo?: {
+    public street?: string;
+    public suite?: string;
+    public city?: string;
+    public zipcode?: string;
+    public geo?: {
         lat?: number;
         lng?: number;
     };

@@ -11,7 +11,7 @@ import { User } from "../../models/user.model";
     styleUrls: ["./user-detail-modal.component.scss"]
 })
 export class UserDetailModalComponent implements OnInit {
-    @Input() user$: BehaviorSubject<User>;
+    @Input() public user$: BehaviorSubject<User>;
 
     public user: User;
 

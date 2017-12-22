@@ -1,5 +1,5 @@
 export class Company {
-    name?: string;
-    catchPhrase?: string;
-    bs?: string;
+    public name?: string;
+    public catchPhrase?: string;
+    public bs?: string;
 }

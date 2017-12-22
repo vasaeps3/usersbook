@@ -2,12 +2,12 @@ import { Address } from "./address.model";
 import { Company } from "./company.model";
 
 export class User {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-    phone: string;
-    website?: string;
-    address?: Address;
-    company?: Company;
+    public id: number;
+    public name: string;
+    public username: string;
+    public email: string;
+    public phone: string;
+    public website?: string;
+    public address?: Address;
+    public company?: Company;
 }

@@ -9,8 +9,8 @@ import { User } from "../../models/user.model";
     styleUrls: ["./user.component.scss"]
 })
 export class UserComponent {
-    @Input() user: User;
-    @Output() selected = new EventEmitter<User>();
+    @Input() public user: User;
+    @Output() public selected = new EventEmitter<User>();
 
     public select() {
         this.selected.emit(this.user);

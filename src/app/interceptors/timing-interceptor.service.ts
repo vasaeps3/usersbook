@@ -6,7 +6,7 @@ import "rxjs/add/operator/do";
 export class TimingInterceptor implements HttpInterceptor {
     constructor() { }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const started = Date.now();
 
         return next
