@@ -5,37 +5,37 @@ import { RouterTestingModule } from "@angular/router/testing";
 
 import { HeaderComponent } from "./header.component";
 
-describe("HeaderComponent (inline template)", () => {
 
-    let comp: HeaderComponent;
+describe("HeaderComponent", () => {
+
+    let component: HeaderComponent;
     let fixture: ComponentFixture<HeaderComponent>;
-    let de: DebugElement;
-    let el: HTMLElement;
+    let textLogoElement: HTMLElement;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [RouterTestingModule],
             declarations: [HeaderComponent],
         }).compileComponents();
-
-        fixture = TestBed.createComponent(HeaderComponent);
-
-        comp = fixture.componentInstance;
-
-        de = fixture.debugElement.query(By.css("span i"));
-        el = de.nativeElement;
-
     }));
 
-    it("should display original text logo", () => {
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HeaderComponent);
+        component = fixture.componentInstance;
         fixture.detectChanges();
-        expect(el.textContent).toContain(comp.textLogo);
+        textLogoElement = fixture.debugElement.query(By.css("span i")).nativeElement;
+    });
+
+    it("should display original text logo", () => {
+        expect(textLogoElement.textContent).toContain(component.textLogo);
     });
 
     it("should display a different text logo", () => {
-        comp.textLogo = "Test text logo";
+        const textLogoTest = "Test text logo";
+        component.textLogo = textLogoTest;
         fixture.detectChanges();
-        expect(el.textContent).toContain("Test text logo");
+
+        expect(textLogoElement.textContent).toContain(textLogoTest);
     });
 
 });
