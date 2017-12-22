@@ -12,29 +12,29 @@ import { HttpInterceptorService } from "./interceptors/http-interceptor.service"
 
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutergModule
-  ],
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    PageErrorComponent,
-    PageNotFoundComponent
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TimingInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorService,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutergModule
+    ],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        PageErrorComponent,
+        PageNotFoundComponent
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TimingInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpInterceptorService,
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
