@@ -8,6 +8,7 @@ import { AppRoutergModule } from "./app-routing.module";
 import { TimingInterceptor } from "./interceptors/timing-interceptor.service";
 import { PageErrorComponent } from "./common-components/page-error/page-error.component";
 import { PageNotFoundComponent } from "./common-components/page-not-found/page-not-found.component";
+import { HttpInterceptorService } from "./interceptors/http-interceptor.service";
 
 
 @NgModule({
@@ -26,6 +27,11 @@ import { PageNotFoundComponent } from "./common-components/page-not-found/page-n
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TimingInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
       multi: true
     }
   ],

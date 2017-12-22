@@ -14,7 +14,6 @@ export class UsersService {
     ) { }
 
     public getAllUsers(): Observable<User[]> {
-        // TODO error
         return <Observable<User[]>>this._httpClient.get(`${UsersService.BASE_URL}/users`);
     }
 
