@@ -1,11 +1,10 @@
-import _ from "lodash";
+import * as _ from "lodash";
 import { Observable } from "rxjs/Observable";
 import { Component, OnInit } from "@angular/core";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
 
 import { User } from "../../models/user.model";
-import { UsersService } from "../users.service";
 
 
 @Component({
@@ -22,7 +21,6 @@ export class UsersListComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private userService: UsersService,
         private activatedRouter: ActivatedRoute,
     ) { }
 
@@ -36,19 +34,16 @@ export class UsersListComponent implements OnInit {
         this.activatedRouter.queryParams.subscribe(
             queryParams => {
                 this.userDetailId = +queryParams["userDetailId"] || null;
-                if (this.userDetailId) {
-                    const userDetail = _.find(this.users, u => u.id === this.userDetailId) || null;
-                    if (userDetail) {
-                        this.user$.next(userDetail);
-                    }
+                const userDetail = _.find(this.users, u => u.id === this.userDetailId) || null;
+                if (!userDetail) {
+                    this.userDetailId = null;
                 }
+                this.user$.next(userDetail);
             }
         );
 
         this.user$.subscribe((user: User) => {
-            if (!user) {
-                this.showModal(null);
-            }
+            this.showModal(user);
         });
 
     }
