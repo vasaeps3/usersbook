@@ -16,10 +16,9 @@ describe("UsersService", () => {
         });
     });
 
-    it("should be a service", inject([
-        HttpTestingController, UsersService
-    ], (httpMock: HttpTestingController, userService: UsersService) => {
-
+    it("should service method return the correct data", () => {
+        const userService: UsersService = TestBed.get(UsersService);
+        const httpMock: HttpTestingController = TestBed.get(HttpTestingController);
         userService
             .getAllUsers()
             .subscribe(users => {
@@ -32,6 +31,6 @@ describe("UsersService", () => {
         expect(request.request.method).toEqual("GET");
         request.flush(fixtures.users);
         httpMock.verify();
-    }));
+    });
 
 });
