@@ -13,7 +13,6 @@ describe("UserDetailModalComponent", () => {
     let component: UserDetailModalComponent;
     let fixture: ComponentFixture<UserDetailModalComponent>;
 
-
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [UserDetailModalComponent],

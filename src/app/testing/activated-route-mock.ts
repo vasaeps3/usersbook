@@ -1,17 +1,14 @@
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 
+
 export class ActivatedRouteMock {
 
     private subjectData = new Subject();
-    private dataValue: {};
-
     private subjectQueryParams = new Subject();
-    private queryParamsValue: {};
 
     set data(data: {}) {
-        this.dataValue = data;
-        this.subjectData.next(this.dataValue);
+        this.subjectData.next(data);
     }
 
     get data() {
@@ -19,16 +16,11 @@ export class ActivatedRouteMock {
     }
 
     set queryParams(queryParams: {}) {
-        this.queryParamsValue = queryParams;
-        this.subjectQueryParams.next(this.queryParamsValue);
+        this.subjectQueryParams.next(queryParams);
     }
 
     get queryParams() {
         return this.subjectQueryParams.asObservable();
-    }
-
-    get snapshot() {
-        return { queryParams: this.queryParamsValue };
     }
 
 }

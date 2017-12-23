@@ -14,7 +14,6 @@ export class UsersListResolverService implements Resolve<User[]> {
     ) { }
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User[]> {
-
         return this.userService.getAllUsers();
     }
 

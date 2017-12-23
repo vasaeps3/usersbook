@@ -3,8 +3,8 @@ import { TestBed } from "@angular/core/testing";
 import { HTTP_INTERCEPTORS, HttpClient } from "@angular/common/http";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 
-import { HttpInterceptorService } from "./http-interceptor.service";
 import { RouterStub } from "../testing/router-stub";
+import { HttpInterceptorService } from "./http-interceptor.service";
 
 
 describe("HttpInterceptorService", () => {
@@ -41,7 +41,7 @@ describe("HttpInterceptorService", () => {
         const httpMock: HttpTestingController = TestBed.get(HttpTestingController);
         const httpClient: HttpClient = TestBed.get(HttpClient);
         const router: RouterStub = TestBed.get(Router);
-        const spy = spyOn(router, "navigate");
+        const navigateSpy: jasmine.Spy = spyOn(router, "navigate");
 
         httpClient.get("/").subscribe();
 
@@ -50,7 +50,7 @@ describe("HttpInterceptorService", () => {
         request.flush({ errorMessage: "Uh oh!" }, { status: 500, statusText: "Server Error" });
         httpMock.verify();
 
-        expect(spy).toHaveBeenCalledWith(["/error"]);
+        expect(navigateSpy).toHaveBeenCalledWith(["/error"]);
     });
 
 });

@@ -1,6 +1,6 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { ActivatedRoute, Router, Params } from "@angular/router";
 import { TestBed, ComponentFixture, async } from "@angular/core/testing";
-import { ActivatedRoute, Router } from "@angular/router";
 
 import * as fixtures from "../../testing/fixture";
 import { RouterStub } from "../../testing/router-stub";
@@ -32,10 +32,10 @@ describe("UsersListComponent", () => {
     });
 
     it("should created the component", () => {
-        expect(component).toBeTruthy();
+        expect(component).toBeDefined();
     });
 
-    it("should NOT have users immediately after ngOnInit", () => {
+    it("should NOT have users right after ngOnInit", () => {
         expect(component.users).toBeUndefined();
     });
 
@@ -46,32 +46,26 @@ describe("UsersListComponent", () => {
         expect(component.users).toEqual(fixtures.users);
     });
 
-    it("should not have a detailed user when there is no query parameter 'userDetailId'", () => {
-        expect(component.userDetailId).toBeUndefined();
-    });
-
-    it("should redirect to the router without parameters when the user is not found by query parameter 'userDetailId'", () => {
-        // resolves users to search for
+    it("should delete query params if user is not found by query parameter 'userDetailId'", () => {
         const activatedRoute: ActivatedRouteMock = TestBed.get(ActivatedRoute);
         activatedRoute.data = { users: fixtures.users };
 
         const router: RouterStub = TestBed.get(Router);
-        const spy = spyOn(router, "navigate");
+        const navigateSpy: jasmine.Spy = spyOn(router, "navigate");
 
-        // sending a message to an observable with a knowingly incorrect ID
-        const userDetailId = { userDetailId: -1 };
-        activatedRoute.queryParams = userDetailId;
+        // it sends a message to an observable with a knowingly incorrect ID
+        const queryParams: Params = { userDetailId: -1 };
+        activatedRoute.queryParams = queryParams;
 
-        // get parameters from the method "navigate"
-        const navArgs = spy.calls.first().args;
+        // it gets parameters from the method "navigate"
+        const navigateArgs = navigateSpy.calls.first().args;
 
-        // queryParams should be undefined
-        expect(navArgs[1].queryParams).toBeUndefined();
+        expect(navigateArgs[1].queryParams).toBeUndefined();
     });
 
-    it("should have a user ID in the query parameter, when geting the user from outside", () => {
+    it("should reflect user ID in the query parameter", () => {
         const router: RouterStub = TestBed.get(Router);
-        const spy = spyOn(router, "navigate");
+        const spy: jasmine.Spy = spyOn(router, "navigate");
 
         component.user$.next(fixtures.user);
         const navArgs = spy.calls.first().args;
@@ -79,14 +73,14 @@ describe("UsersListComponent", () => {
         expect(navArgs[1].queryParams.userDetailId).toBe(fixtures.user.id);
     });
 
-    it("should not have a query parameter, when geting null instead of the user from outside", () => {
+    it("should reflect user ID in the query parameter (null case)", () => {
         const router: RouterStub = TestBed.get(Router);
-        const spy = spyOn(router, "navigate");
+        const spy: jasmine.Spy = spyOn(router, "navigate");
 
         component.user$.next(null);
-        const navArgs = spy.calls.first().args;
+        const navigateArgs = spy.calls.first().args;
 
-        expect(navArgs[1].queryParams).toBeUndefined();
+        expect(navigateArgs[1].queryParams).toBeUndefined();
     });
 
 });

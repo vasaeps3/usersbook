@@ -1,7 +1,13 @@
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { Injectable, Injector } from "@angular/core";
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import {
+    HttpEvent,
+    HttpRequest,
+    HttpHandler,
+    HttpInterceptor,
+    HttpErrorResponse
+} from "@angular/common/http";
 import "rxjs/add/operator/catch";
 import "rxjs/add/observable/of";
 
@@ -13,7 +19,6 @@ export class HttpInterceptorService implements HttpInterceptor {
     ) { }
 
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
         return next.handle(req).catch((error) => {
             if (error instanceof HttpErrorResponse) {
                 this.router.navigate(["/error"]);
@@ -23,6 +28,5 @@ export class HttpInterceptorService implements HttpInterceptor {
 
             return Observable.throw(error);
         });
-
     }
 }
